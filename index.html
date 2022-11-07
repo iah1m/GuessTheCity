@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ro-RO">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ghicește orașul">
+    <meta name="keywords" content="HTML,CSS,JavaScript">
+    <meta name="author" content="Flanja Cosmin-Mihai">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the City</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+<div id="main_Wrapper"> <!--Div that will wrap all the content -->
+
+<div id="game_Title">
+
+<p>Ghicește orașul!</p>
+
+</div>
+
+<div id="mainmenu_Wrapper"> <!--  we use this to center the main menu -->
+  
+<div id="main_menu_options_Wrapper"><!--  we use this to display the options of the main menu -->
+
+  <button type="button" class="menu_Option" id="choose_game_type_Option" onclick="displayGameChoiceMenu()">Alege tipul jocului</button>
+ 
+  <button type="button" class="menu_Option" id="refresh_Option">Reîncarcare pagină</button>
+
+</div>
+
+<div id="game_mode_selection_Wrapper"><!--  we use this to display the game modes and a back button towards the main menu -->
+
+<button type="button" class="menu_Option" id="endless_mode_Option">Clasic</button>
+
+<button type="button" class="menu_Option" id="challenge_mode_Option" disabled>Provocare</button>
+
+<button type="button" class="menu_Option" id="back_from_game_mode_selection_Button" onclick="goBackToMainMenu()">Back</button>
+
+</div>
+
+</div>
+
+<div id="flex_Wrapper"> <!-- Use this to wrap an actual game round, display it only after a menu option has been chosen-->
+
+<div id="pic_Wrapper">  <!--Div that will wrap the picture of the city -->
+
+  <img id="pictureLocation">
+  <div id="pictureDetails"> <!-- we want the pictureDetails to overlap with the pictureLocation-->
+  </div>
+
+</div><!--pic_Wrapper ends here -->
+
+<div id="response_Wrapper">  <!--Div that will wrap the possible responses -->
+
+  <div class="response_Option" data-value="0" id="r_O_1">
+    Varianta 1
+  </div>
+
+  <div class="response_Option" data-value="0" id="r_O_2">
+    Varianta 2
+  </div>
+
+  <div class="response_Option" data-value="0" id="r_O_3">
+    Varianta 3
+  </div>
+
+  <div class="response_Option" data-value="0" id="r_O_4">
+    Varianta 4
+  </div>
+
+</div><!--response_Wrapper ends here -->
+
+
+<div id="score_Wrapper"> <!-- div that wraps the score(current question number, how many correct/wrong) / eventually use this for challenge mode . use this to align it properly-->
+
+  <div id="score_status"> <!-- here we include everything about the score(correct/wrong) and in the future some stats for the challenge -->
+        
+  </div>
+
+  
+
+</div>
+
+
+<div id="options_Wrapper">  <!--Div that will wrap misc options, at the bottom of the page -->
+
+</div><!--options_Wrapper ends here -->
+
+</div><!-- flex_Wrapper ends here-->
+
+<div id="sideMenu_Wrapper">  <!--Div that will wrap a side menu, which extends on click -->
+
+</div><!--sideMenu_Wrapper ends here -->
+
+</div><!--main_Wrapper ends here -->
+
+<script>
+
+let cityArrJSON='{"cities":[' +
+'{"name" : "Roma","photo_link" : "./pictures/0.jpg","photo_description" : "Photo by Bob Richards on StockSnap", "tips": "No tip so far"},' +
+'{"name" : "Londra","photo_link" : "./pictures/1.jpg","photo_description" : "Photo by Rucksack Magazine on StockSnap", "tips": "No tip so far "},' +
+'{"name" : "Praga","photo_link" : "./pictures/2.jpg","photo_description" : "Photo by BY RAFFAEL HERRMANN on cc0.photo", "tips": "No tip so far "},' +
+'{"name" : "Bucuresti","photo_link" : "./pictures/3.jpg","photo_description" : "Photo via goodfreephotos.com", "tips": "No tip so far "}]}' ;
+const cities_number=4;
+let list = JSON.parse(cityArrJSON);
+
+let wrong_answer_count=0;
+let correct_answer_count=0;
+
+window.addEventListener("load", addEventListeners);
+// --------------------- functions from here on ---------------------------
+function addEventListeners()
+{
+  document.getElementById("pictureLocation").addEventListener("mouseenter",displayPictureSource);
+  document.getElementById("pictureLocation").addEventListener("mouseleave",revertPictureState);
+  document.getElementById("refresh_Option").addEventListener("click",refreshPage);
+  document.getElementById("choose_game_type_Option").addEventListener("click",displayGameChoiceMenu);
+  document.getElementById("back_from_game_mode_selection_Button").addEventListener("click",goBackToMainMenu);
+  document.getElementById("endless_mode_Option").addEventListener("click",startClassicGame);
+  var options = document.getElementsByClassName("response_Option");
+  for(let i=0;i<options.length;i++)
+    options[i].addEventListener("click",function(){clickOnOption(i);});
+  
+};
+
+function displayPictureSource()         // use this to blur the image and display the source as text over the blurred image
+{
+  document.getElementById("pictureLocation").style="opacity:0.2;";
+  document.getElementById("pictureDetails").style="opacity:1.0";
+};
+
+function revertPictureState()
+{
+  document.getElementById("pictureLocation").style="opacity:1.0;";
+  document.getElementById("pictureDetails").style="opacity:0.0";
+};
+
+function displayCityPicture(i) // function that displays the picture for the question
+{
+  document.getElementById("pictureLocation").src=list.cities[i].photo_link;
+  document.getElementById("pictureDetails").innerHTML=list.cities[i].photo_description;
+  document.getElementById("pictureDetails").style="opacity:0.0";
+};
+
+function refreshPage()
+{
+  location.reload();
+};
+
+function displayGameChoiceMenu() // this function hides the first menu, and displays the menu where the user can choose the game type
+{
+  document.getElementById("game_mode_selection_Wrapper").style.display='flex';
+  document.getElementById("main_menu_options_Wrapper").style.display='none';
+};
+
+function goBackToMainMenu()// this function hides the menu where the user can choose the game type, and displays the first menu
+{
+  document.getElementById("main_menu_options_Wrapper").style.display='flex';
+  document.getElementById("game_mode_selection_Wrapper").style.display='none';
+};
+
+function poseAQuestion() // a question should have 1 correct answer, 3 wrong ones, and it attach place each answer to a button
+{ // it should also set the picture
+  // we generate 4 random city ids, with 1 correct and 3 wrong ones
+  let randCity=Math.floor(Math.random() * cities_number); // this is a random city for the question. it is the correct answer, and the picture associated with it will be displayed
+  // list.cities[randCity].name; - this is the correct answer to the question (i.e the name of the city)
+  displayCityPicture(randCity); // we display the picture of the chosen city, for the question
+
+  let cityOptions=[randCity]; // this array stores the numbers of the cities whose names have been chosen to be presented in the question. it includes the correct answer and 3 wrong ones
+  let other_answers=generateRandomAnswers(randCity); // this is an array with 3 other random cities, except the correct one. we use it to offer options for the question
+
+  for(let i=1;i<4;i++)
+    cityOptions.push(other_answers[i]); // we add the 3 wrong cities to the cityOptions array.
+
+  let all_answers_are_set=0; // flag, will be set to 1 when we have assigned each city name to an option
+  let options_set=[-1,-1,-1,-1]; // array that stores the options that have already been set. -1 means that this option has not been set, and 1 means that it has been set
+  
+  for(let i=0;i<4;i++) // we will set each city to 1 option
+  { 
+    city_has_been_set=0; // city will be set to an option if the options_set position is not -1
+    while(city_has_been_set==0)
+    {
+      let randOption=Math.floor(Math.random()*4); // we generate a number between 0 and 3, which corresponds to a button/option in the question
+      if(options_set[randOption]==-1) // this option has not been set, so we can use it
+      { 
+        options_set[randOption]=1;
+        let text="r_O_"+(randOption+1);
+        if(list.cities[cityOptions[i]].name==list.cities[randCity].name) // this option will be the correct one
+          setCityToOption(text,1,list.cities[cityOptions[i]].name);
+        else
+          setCityToOption(text,0,list.cities[cityOptions[i]].name);
+        city_has_been_set=1; // we have set this option, so we can move on
+      }
+    }
+  }
+}
+
+function generateRandomAnswers(i)
+{ // generates 3 random answers that are not equal to the correct answer i
+
+  let chosen_answers=[i];
+  while(chosen_answers.length<4)
+  {
+    let rand=Math.floor(Math.random() * cities_number);
+    let answer_is_good=1;
+    for(let i=0;i<chosen_answers.length;i++) // we verify that the function does not generate duplicate answers
+    {
+      if(rand==chosen_answers[i])
+      {
+        answer_is_good=0;
+        break;
+      }
+    }
+    if(answer_is_good==1)
+      chosen_answers.push(rand);
+  }
+  return chosen_answers;
+}
+
+function setCityToOption(id,isCorrect,cityName) // function that will set the name of the city and a flag to the data-value of the button identified by the id parameter
+{ // id is the id of the button, isCorrect is 1 if the answer is correct or 0 otherwise, the cityName is the name of the city
+
+  document.getElementById(id).setAttribute("data-value",isCorrect);
+  document.getElementById(id).innerHTML=cityName; // we need the name of the city
+}
+
+function clickOnOption(i)
+{
+  // i is offset by 1,always use i+1 to access useable value
+  let text="r_O_"+(i+1);
+  let isCorrect=document.getElementById(text).getAttribute("data-value");
+  if(isCorrect==1) // update score_status according to the answer
+  {
+    correct_answer_count++; 
+    console.log(correct_answer_count);
+    updateScoreCount();
+  }
+  else
+  {
+    wrong_answer_count++;
+    console.log(wrong_answer_count);
+    updateScoreCount();
+  }
+  poseAQuestion();
+}
+
+function updateScoreCount() /// at the moment we just display correct/wrong answer counts. eventually we will use this to update some challenge specific stats as well
+{
+  console.log("Updating");
+  document.getElementById("score_status").innerHTML="Raspunsuri corecte : "+"<span style=\"color:red; font-size:2vw; \">" + correct_answer_count + "</span>" 
+  document.getElementById("score_status").innerHTML+="\n"+"Raspunsuri gresite : "+ "<span style=\"color:red; font-size:2vw; \">" + wrong_answer_count + "</span>";
+}
+
+
+function startClassicGame()
+{
+  document.getElementById("mainmenu_Wrapper").style.display='none';
+  document.getElementById("game_Title").style.display='none';
+  document.getElementById("flex_Wrapper").style.display='flex';
+ 
+    let question_number=1;
+    poseAQuestion();
+};
+
+</script>
+
+
+
+</body>
+
+</html>

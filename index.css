@@ -1,0 +1,163 @@
+body
+{
+  margin:0;
+  padding:0;
+  min-width:100%;
+  min-height:100%;
+  max-width:100%;
+  max-height:100%;
+  background-image:url("./pictures/background.webp");
+  overflow:hidden;
+}
+
+#main_Wrapper
+{
+  margin: 0;
+  padding:0;
+}
+
+#flex_Wrapper
+{
+  display:none;
+  --display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#response_Wrapper
+{
+  display: flex;
+  position:relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding:10px;
+  top:6vmin;
+  height:25vmin;
+  width:25vmin;
+  margin:0;
+} 
+
+#game_Title
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top:10vh;
+}
+
+#game_Title>p
+{
+color:red;
+font-family: 'Snell Roundhand', cursive;
+font-size:5vw;
+}
+
+#mainmenu_Wrapper
+{
+  display: flex;
+  top:30vh;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  height:30vh;
+}
+
+#main_menu_options_Wrapper
+{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  width:50vw;
+  height:30vh;
+}
+
+#game_mode_selection_Wrapper
+{
+  display:none;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  height:30vh;
+  width:50vw;
+}
+
+#pic_Wrapper
+{
+  display: grid;
+  grid-template-columns: auto;
+  height:45vh;
+  width:55vw;
+  margin:0;
+  padding:0;
+  justify-items: center;
+  align-items: center;
+  
+}
+
+#pictureLocation
+{
+  height:45vh;
+  width:55vw;
+  margin:0;
+  padding:0; 
+  grid-column: 1;
+  grid-row: 1;
+  
+}
+
+#pictureDetails
+{
+  font-size:0.85vw;
+  height:3vh;
+  width:25vw;
+  color:antiquewhite;
+  grid-column: 1;
+  grid-row-start: 1;
+  text-align:center;  
+}
+
+#score_Wrapper
+{
+  display: grid;
+  position:relative;
+  grid-template-columns: auto;
+  justify-items: center;
+  align-items: center;
+  top:6vmin;
+  height:25vmin;
+  width:25vmin;
+  margin:0;
+  padding:0;
+} 
+
+#score_status
+{
+  font-size:2vw;
+  color:antiquewhite;
+}
+
+.menu_Option
+{
+  padding: 5px;
+  font-size:2vw;
+  margin:10px;
+  width:25vw;
+  cursor:pointer;
+  background-color:#cd853f;
+}
+
+.response_Option
+{
+  border: 0.1em solid red;
+  width:15vw;
+  text-align: center;
+  padding: 5px;
+  border-radius: 3em;
+  font-size:2vw;
+  margin:10px;
+  cursor:pointer;
+  background-color:#cd853f;
+}
