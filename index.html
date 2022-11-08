@@ -103,24 +103,42 @@ let cityArrJSON='{"cities":[' +
 '{"name" : "Roma","photo_link" : "./pictures/0.jpg","photo_description" : "Photo by Bob Richards on StockSnap", "tips": "No tip so far"},' +
 '{"name" : "Londra","photo_link" : "./pictures/1.jpg","photo_description" : "Photo by Rucksack Magazine on StockSnap", "tips": "No tip so far "},' +
 '{"name" : "Praga","photo_link" : "./pictures/2.jpg","photo_description" : "Photo by BY RAFFAEL HERRMANN on cc0.photo", "tips": "No tip so far "},' +
-'{"name" : "Bucuresti","photo_link" : "./pictures/3.jpg","photo_description" : "Photo via goodfreephotos.com", "tips": "No tip so far "}]}' ;
-const cities_number=4;
+'{"name" : "Bucuresti","photo_link" : "./pictures/3.jpg","photo_description" : "Photo via goodfreephotos.com", "tips": "No tip so far "},' +
+'{"name" : "Amsterdam","photo_link" : "./pictures/4.jpg","photo_description" : "Photo by Mustang Joe on flickr","tips" : "Gara Centrala"},'+
+'{"name" : "Atena","photo_link" : "./pictures/5.jpg","photo_description" : "Photo by Gary Lee Todd on flickr","tips" : "Acropole"}]}';
+
+const cities_number=6;
 let list = JSON.parse(cityArrJSON);
 
 let wrong_answer_count=0;
 let correct_answer_count=0;
 
+var img=new Image();
+  img.onload=function() // we use this function to load the buttons ONLY when the image is already loaded -- need to change this in the future with a better approach
+  {
+    displayResponseButtons();
+  }
+
 window.addEventListener("load", addEventListeners);
+
 // --------------------- functions from here on ---------------------------
 function addEventListeners()
 {
+
+
   document.getElementById("pictureLocation").addEventListener("mouseenter",displayPictureSource);
   document.getElementById("pictureLocation").addEventListener("mouseleave",revertPictureState);
+
   document.getElementById("refresh_Option").addEventListener("click",refreshPage);
+
   document.getElementById("choose_game_type_Option").addEventListener("click",displayGameChoiceMenu);
+
   document.getElementById("back_from_game_mode_selection_Button").addEventListener("click",goBackToMainMenu);
+
   document.getElementById("endless_mode_Option").addEventListener("click",startClassicGame);
+
   var options = document.getElementsByClassName("response_Option");
+
   for(let i=0;i<options.length;i++)
     options[i].addEventListener("click",function(){clickOnOption(i);});
   
@@ -140,7 +158,8 @@ function revertPictureState()
 
 function displayCityPicture(i) // function that displays the picture for the question
 {
-  document.getElementById("pictureLocation").src=list.cities[i].photo_link;
+  img.src=list.cities[i].photo_link;
+  document.getElementById("pictureLocation").src=img.src;
   document.getElementById("pictureDetails").innerHTML=list.cities[i].photo_description;
   document.getElementById("pictureDetails").style="opacity:0.0";
 };
@@ -196,6 +215,9 @@ function poseAQuestion() // a question should have 1 correct answer, 3 wrong one
       }
     }
   }
+
+  hideResponseButtons(); // we hide the response buttons, so that they will only appear visible once the image loads
+
 }
 
 function generateRandomAnswers(i)
@@ -254,6 +276,15 @@ function updateScoreCount() /// at the moment we just display correct/wrong answ
   document.getElementById("score_status").innerHTML+="\n"+"Raspunsuri gresite : "+ "<span style=\"color:red; font-size:2vw; \">" + wrong_answer_count + "</span>";
 }
 
+function displayResponseButtons()
+{
+  document.getElementById("response_Wrapper").style.display="flex";
+}
+
+function hideResponseButtons()
+{
+  document.getElementById("response_Wrapper").style.display="none";
+}
 
 function startClassicGame()
 {
