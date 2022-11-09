@@ -48,7 +48,12 @@
 <div id="pic_Wrapper">  <!--Div that will wrap the picture of the city -->
 
   <img id="pictureLocation">
-  <div id="pictureDetails"> <!-- we want the pictureDetails to overlap with the pictureLocation-->
+  <div id="pictureDetails"> <!-- we want the pictureDetails to overlap with the pictureLocation. it includes some extra information about the photo that will help with identification of the city-->
+  
+  </div>
+
+  <div id="pictureOrigin"> <!-- we want the pictureDetails to overlap with the pictureLocation-->
+
   </div>
 
 </div><!--pic_Wrapper ends here -->
@@ -100,15 +105,32 @@
 <script>
 
 let cityArrJSON='{"cities":[' +
-'{"name" : "Roma","photo_link" : "./pictures/0.jpg","photo_description" : "Photo by Bob Richards on StockSnap", "tips": "No tip so far"},' +
-'{"name" : "Londra","photo_link" : "./pictures/1.jpg","photo_description" : "Photo by Rucksack Magazine on StockSnap", "tips": "No tip so far "},' +
-'{"name" : "Praga","photo_link" : "./pictures/2.jpg","photo_description" : "Photo by BY RAFFAEL HERRMANN on cc0.photo", "tips": "No tip so far "},' +
-'{"name" : "Bucuresti","photo_link" : "./pictures/3.jpg","photo_description" : "Photo via goodfreephotos.com", "tips": "No tip so far "},' +
-'{"name" : "Amsterdam","photo_link" : "./pictures/4.jpg","photo_description" : "Photo by Mustang Joe on flickr","tips" : "Gara Centrala"},'+
-'{"name" : "Atena","photo_link" : "./pictures/5.jpg","photo_description" : "Photo by Gary Lee Todd on flickr","tips" : "Acropole"}]}';
+'{"name" : "Roma","photo_link" : "./pictures/0.jpg","photo_description" : "Photo by Bob Richards on StockSnap", "tips": " " , "after_response_description":" "},' +
+'{"name" : "Londra","photo_link" : "./pictures/1.jpg","photo_description" : "Photo by Rucksack Magazine on StockSnap", " ": "Big Ben", "after_response_description":" "},' +
+'{"name" : "Praga","photo_link" : "./pictures/2.jpg","photo_description" : "Photo by BY RAFFAEL HERRMANN on cc0.photo", " ": "Piata din Centrul Vechi", "after_response_description":" "},' +
+'{"name" : "Bucuresti","photo_link" : "./pictures/3.jpg","photo_description" : "Photo via goodfreephotos.com", "tips": " ", "after_response_description":" "},' +
+'{"name" : "Amsterdam","photo_link" : "./pictures/4.jpg","photo_description" : "Photo by Mustang Joe on flickr","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Atena","photo_link" : "./pictures/5.jpg","photo_description" : "Photo by Gary Lee Todd on flickr","tips" : " ", "after_response_description":" "},' +
+'{"name" : "Belgrad","photo_link" : "./pictures/6.jpg","photo_description" : "by Anne & David on flickr ","tips" : " ", "after_response_description":" "}]}';
 
-const cities_number=6;
+
 let list = JSON.parse(cityArrJSON);
+const cities_number=list.cities.length;
+
+
+function add_cities_text()
+{
+  let i=0;
+  list.cities[i++].tips="Coloseumul";
+  list.cities[i++].tips="Big Ben";
+  list.cities[i++].tips="Piata din Centrul Vechi";
+  list.cities[i++].tips="Palatul Parlementului";
+  list.cities[i++].tips="Gara Centrala";
+  list.cities[i++].tips="Acropole";
+  list.cities[i++].tips="Biserica Sf. Sava";
+}
+
+add_cities_text();
 
 let wrong_answer_count=0;
 let correct_answer_count=0;
@@ -124,7 +146,6 @@ window.addEventListener("load", addEventListeners);
 // --------------------- functions from here on ---------------------------
 function addEventListeners()
 {
-
 
   document.getElementById("pictureLocation").addEventListener("mouseenter",displayPictureSource);
   document.getElementById("pictureLocation").addEventListener("mouseleave",revertPictureState);
@@ -160,8 +181,12 @@ function displayCityPicture(i) // function that displays the picture for the que
 {
   img.src=list.cities[i].photo_link;
   document.getElementById("pictureLocation").src=img.src;
-  document.getElementById("pictureDetails").innerHTML=list.cities[i].photo_description;
+
+  document.getElementById("pictureDetails").innerHTML=list.cities[i].tips; // some extra info to help identify the city
   document.getElementById("pictureDetails").style="opacity:0.0";
+
+  document.getElementById("pictureOrigin").innerHTML=list.cities[i].photo_description;
+
 };
 
 function refreshPage()
@@ -295,6 +320,8 @@ function startClassicGame()
     let question_number=1;
     poseAQuestion();
 };
+
+
 
 </script>
 
