@@ -111,15 +111,18 @@ let cityArrJSON='{"cities":[' +
 '{"name" : "Bucuresti","photo_link" : "./pictures/3.jpg","photo_description" : "Photo via goodfreephotos.com", "tips": " ", "after_response_description":" "},' +
 '{"name" : "Amsterdam","photo_link" : "./pictures/4.jpg","photo_description" : "Photo by Mustang Joe on flickr","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Atena","photo_link" : "./pictures/5.jpg","photo_description" : "Photo by Gary Lee Todd on flickr","tips" : " ", "after_response_description":" "},' +
-'{"name" : "Belgrad","photo_link" : "./pictures/6.jpg","photo_description" : "by Anne & David on flickr ","tips" : " ", "after_response_description":" "}]}';
-
+'{"name" : "Belgrad","photo_link" : "./pictures/6.jpg","photo_description" : "Photo by Anne & David on flickr ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Belrin","photo_link" : "./pictures/7.jpg","photo_description" : "Photo by John Copley on flickr ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Zagreb","photo_link" : "./pictures/30.jpg","photo_description" : "Photo by Jorge Franganillo on flickr","tips" : " ", "after_response_description":" "}]}';
 
 let list = JSON.parse(cityArrJSON);
 const cities_number=list.cities.length;
 
 
+
 function add_cities_text()
 {
+  let a=list.cities.length;
   let i=0;
   list.cities[i++].tips="Coloseumul";
   list.cities[i++].tips="Big Ben";
@@ -128,12 +131,17 @@ function add_cities_text()
   list.cities[i++].tips="Gara Centrala";
   list.cities[i++].tips="Acropole";
   list.cities[i++].tips="Biserica Sf. Sava";
+  list.cities[i++].tips="Poarta Brandenburg";
+  list.cities[a-1].tips="Teatrul National Croat";
 }
 
-add_cities_text();
+
+add_cities_text();// we execute these to more easily add some cities. 
 
 let wrong_answer_count=0;
 let correct_answer_count=0;
+
+let randCity=-1;
 
 var img=new Image();
   img.onload=function() // we use this function to load the buttons ONLY when the image is already loaded -- need to change this in the future with a better approach
@@ -206,10 +214,18 @@ function goBackToMainMenu()// this function hides the menu where the user can ch
   document.getElementById("game_mode_selection_Wrapper").style.display='none';
 };
 
-function poseAQuestion() // a question should have 1 correct answer, 3 wrong ones, and it attach place each answer to a button
+function poseAQuestion() // a question should have 1 correct answer, 3 wrong ones, and it attach place each answer to a button + we send the previous picture so that it will not pose same question again
 { // it should also set the picture
   // we generate 4 random city ids, with 1 correct and 3 wrong ones
-  let randCity=Math.floor(Math.random() * cities_number); // this is a random city for the question. it is the correct answer, and the picture associated with it will be displayed
+  let not_same_city=1;
+  prev=randCity; // we set prev to randCity, because it is the actual previous city now, since we will generate another
+  while(not_same_city==1)
+  { // we make sure that the current city is not the same as the previous one
+    randCity=Math.floor(Math.random() * cities_number); // this is a random city for the question. it is the correct answer, and the picture associated with it will be displayed
+    if(randCity!=prev)
+      not_same_city=0;
+  }
+ 
   // list.cities[randCity].name; - this is the correct answer to the question (i.e the name of the city)
   displayCityPicture(randCity); // we display the picture of the chosen city, for the question
 
@@ -242,7 +258,7 @@ function poseAQuestion() // a question should have 1 correct answer, 3 wrong one
   }
 
   hideResponseButtons(); // we hide the response buttons, so that they will only appear visible once the image loads
-
+  prev=randCity; // we set this so that we dont have same city 2 times in a row
 }
 
 function generateRandomAnswers(i)
@@ -282,13 +298,13 @@ function clickOnOption(i)
   if(isCorrect==1) // update score_status according to the answer
   {
     correct_answer_count++; 
-    console.log(correct_answer_count);
+   
     updateScoreCount();
   }
   else
   {
     wrong_answer_count++;
-    console.log(wrong_answer_count);
+ 
     updateScoreCount();
   }
   poseAQuestion();
@@ -296,7 +312,7 @@ function clickOnOption(i)
 
 function updateScoreCount() /// at the moment we just display correct/wrong answer counts. eventually we will use this to update some challenge specific stats as well
 {
-  console.log("Updating");
+ 
   document.getElementById("score_status").innerHTML="Raspunsuri corecte : "+"<span style=\"color:red; font-size:2vw; \">" + correct_answer_count + "</span>" 
   document.getElementById("score_status").innerHTML+="\n"+"Raspunsuri gresite : "+ "<span style=\"color:red; font-size:2vw; \">" + wrong_answer_count + "</span>";
 }
@@ -321,11 +337,7 @@ function startClassicGame()
     poseAQuestion();
 };
 
-
-
 </script>
-
-
 
 </body>
 
