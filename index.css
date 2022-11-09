@@ -27,7 +27,8 @@ body
 
 #response_Wrapper
 {
-  display: flex;
+  display:none;
+  --display: flex;
   position:relative;
   flex-direction: column;
   justify-content: center;
@@ -89,7 +90,8 @@ font-size:5vw;
   display: grid;
   grid-template-columns: auto;
   height:45vh;
-  width:55vw;
+  --width:55vw;
+  width:100%;
   margin:0;
   padding:0;
   justify-items: center;
@@ -100,7 +102,8 @@ font-size:5vw;
 #pictureLocation
 {
   height:45vh;
-  width:55vw;
+  --width:55vw;
+  width:100%;
   margin:0;
   padding:0; 
   grid-column: 1;
@@ -117,6 +120,18 @@ font-size:5vw;
   grid-column: 1;
   grid-row-start: 1;
   text-align:center;  
+}
+
+#pictureOrigin
+{
+  position:absolute;
+  left:90%;
+  top:0%;
+  font-size:0.85vw;
+  height:3vh;
+  width:10vw;
+  color:antiquewhite;
+  text-align:center; 
 }
 
 #score_Wrapper
