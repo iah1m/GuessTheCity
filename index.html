@@ -208,6 +208,8 @@ function displayCityPicture(i) // function that displays the picture for the que
 
   document.getElementById("pictureOrigin").innerHTML=list.cities[i].photo_description;
 
+  set_icon_style();// we should also set the dimension of the icon, based on picture dimension
+
 };
 
 function refreshPage()
@@ -379,6 +381,19 @@ function updateAnswerVerdict(answer)
 {
   console.log("updating answerVerdict text to "+answer);
   document.getElementById("answerVerdict").innerHTML=answer;
+}
+
+function set_icon_style()
+{
+  let icon_width=String( (10/100)*document.getElementById("pictureLocation").offsetWidth);
+  let icon_height=String( (10/100)*document.getElementById("pictureLocation").offsetHeight );
+
+  let icon_top_offset=String( 700 );
+
+  console.log(icon_top_offset);
+  //document.getElementById("pictureInfoIcon").width=icon_width;
+  //document.getElementById("pictureInfoIcon").height=icon_height;
+  //document.getElementById("pictureInfoIcon").style.top="300px;"
 }
 
 function startClassicGame()
