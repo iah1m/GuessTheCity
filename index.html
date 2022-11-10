@@ -45,16 +45,28 @@
 
 <div id="flex_Wrapper"> <!-- Use this to wrap an actual game round, display it only after a menu option has been chosen-->
 
+  <div id="answerVerdict"> <!--Div that we use to display if the answer given was wrong or correct. it will appear instead of the image -->
+   
+  </div>
+
 <div id="pic_Wrapper">  <!--Div that will wrap the picture of the city -->
 
+  
+
   <img id="pictureLocation">
-  <div id="pictureDetails"> <!-- we want the pictureDetails to overlap with the pictureLocation. it includes some extra information about the photo that will help with identification of the city-->
+  <div id="pictureDetails"> <!-- we want the pictureDetails to overlap with the pictureLocation. 
+    it includes some extra information about the photo that will help with identification of the city
+    we will display the content on mouseover event, tied to the "i" in the bottom right of the picture-->
   
   </div>
 
-  <div id="pictureOrigin"> <!-- we want the pictureDetails to overlap with the pictureLocation-->
+  <div id="pictureOrigin"> <!-- we display here the credits towards the author of the photo-->
 
   </div>
+
+  <img id="pictureInfoIcon" src="./pictures/i.svg"> <!-- a small i icon, which users can hover over to find some extra information that might help them identify the city-->
+
+ 
 
 </div><!--pic_Wrapper ends here -->
 
@@ -132,7 +144,8 @@ function add_cities_text()
   list.cities[i++].tips="Acropole";
   list.cities[i++].tips="Biserica Sf. Sava";
   list.cities[i++].tips="Poarta Brandenburg";
-  list.cities[a-1].tips="Teatrul National Croat";
+
+  list.cities[a-1].tips="Teatrul National Croat"; // Zagreb is last city for now, so we keep this as the final line
 }
 
 
@@ -155,8 +168,8 @@ window.addEventListener("load", addEventListeners);
 function addEventListeners()
 {
 
-  document.getElementById("pictureLocation").addEventListener("mouseenter",displayPictureSource);
-  document.getElementById("pictureLocation").addEventListener("mouseleave",revertPictureState);
+  document.getElementById("pictureInfoIcon").addEventListener("mouseenter",displayPictureSource);
+  document.getElementById("pictureInfoIcon").addEventListener("mouseleave",revertPictureState);
 
   document.getElementById("refresh_Option").addEventListener("click",refreshPage);
 
@@ -214,9 +227,14 @@ function goBackToMainMenu()// this function hides the menu where the user can ch
   document.getElementById("game_mode_selection_Wrapper").style.display='none';
 };
 
+
 function poseAQuestion() // a question should have 1 correct answer, 3 wrong ones, and it attach place each answer to a button + we send the previous picture so that it will not pose same question again
 { // it should also set the picture
   // we generate 4 random city ids, with 1 correct and 3 wrong ones
+  
+  displayImage(); // in case the image is hidden, we enable it here
+  hideAnswerVerdict(); // we hide the answer verdict, since it contains nothing for now
+
   let not_same_city=1;
   prev=randCity; // we set prev to randCity, because it is the actual previous city now, since we will generate another
   while(not_same_city==1)
@@ -257,7 +275,7 @@ function poseAQuestion() // a question should have 1 correct answer, 3 wrong one
     }
   }
 
-  hideResponseButtons(); // we hide the response buttons, so that they will only appear visible once the image loads
+  hideResponseButtons(); // we hide the response buttons, so that they will only appear visible once the image loads. the will be displayed from an image onload event
   prev=randCity; // we set this so that we dont have same city 2 times in a row
 }
 
@@ -290,24 +308,32 @@ function setCityToOption(id,isCorrect,cityName) // function that will set the na
   document.getElementById(id).innerHTML=cityName; // we need the name of the city
 }
 
+
+
 function clickOnOption(i)
-{
+{ // CURRENT_BEHAVIOUR : set a 2-3 second delay before next question, while hiding the image and the response buttons and displaying if the answer given was correct or incorrect
   // i is offset by 1,always use i+1 to access useable value
+  
   let text="r_O_"+(i+1);
   let isCorrect=document.getElementById(text).getAttribute("data-value");
   if(isCorrect==1) // update score_status according to the answer
   {
     correct_answer_count++; 
-   
     updateScoreCount();
+    updateAnswerVerdict("Raspuns corect");
   }
   else
   {
     wrong_answer_count++;
- 
     updateScoreCount();
+    updateAnswerVerdict("Raspuns gresit");
   }
-  poseAQuestion();
+  
+  hideImage();// we hide the image 
+  hideResponseButtons();//and the buttons after an answer was selected
+  displayAnswerVerdict();
+  //setTimeout(function(){alert("We are doing it.")},3000);
+  setTimeout(poseAQuestion, 3000);// we trigger poseAQuestion after 3 seconds
 }
 
 function updateScoreCount() /// at the moment we just display correct/wrong answer counts. eventually we will use this to update some challenge specific stats as well
@@ -325,6 +351,34 @@ function displayResponseButtons()
 function hideResponseButtons()
 {
   document.getElementById("response_Wrapper").style.display="none";
+}
+
+function hideImage()
+{
+  document.getElementById("pic_Wrapper").style.display="none";
+}
+
+function displayImage()
+{
+  document.getElementById("pic_Wrapper").style.display="grid";
+}
+
+function hideAnswerVerdict()
+{
+  console.log("hiding");
+  document.getElementById("answerVerdict").style.display="none";
+}
+
+function displayAnswerVerdict()
+{
+  document.getElementById("answerVerdict").style.display="block";
+  console.log("displaying");
+}
+
+function updateAnswerVerdict(answer)
+{
+  console.log("updating answerVerdict text to "+answer);
+  document.getElementById("answerVerdict").innerHTML=answer;
 }
 
 function startClassicGame()
