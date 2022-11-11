@@ -159,6 +159,7 @@ let randCity=-1;
 var img=new Image();
   img.onload=function() // we use this function to load the buttons ONLY when the image is already loaded -- need to change this in the future with a better approach
   {
+    displayImage();
     displayResponseButtons();
   }
 
@@ -234,7 +235,6 @@ function poseAQuestion() // a question should have 1 correct answer, 3 wrong one
 { // it should also set the picture
   // we generate 4 random city ids, with 1 correct and 3 wrong ones
   
-  displayImage(); // in case the image is hidden, we enable it here
   hideAnswerVerdict(); // we hide the answer verdict, since it contains nothing for now
 
   let not_same_city=1;
