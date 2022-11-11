@@ -89,26 +89,22 @@ font-size:5vw;
 {
   display: grid;
   grid-template-columns: auto;
-  height:45vh;
-  --width:55vw;
-  width:100%;
   margin:0;
   padding:0;
   justify-items: center;
   align-items: center;
-  
 }
 
 #pictureLocation
 {
   height:45vh;
-  --width:55vw;
-  width:100%;
+  width:55vw;
+  --width:100%;
+  object-fit: cover;
   margin:0;
   padding:0; 
   grid-column: 1;
   grid-row: 1;
-  
 }
 
 #pictureDetails
@@ -126,7 +122,7 @@ font-size:5vw;
 #pictureOrigin
 {
   position:absolute;
-  left:90%;
+  left:67%;
   top:0%;
   font-size:2.75vmin;
   height:10vh;
@@ -138,11 +134,11 @@ font-size:5vw;
 
 #pictureInfoIcon
 {
-  position:absolute;
-  left:94%;
-  top:37vh;
-  height:8vh;
-  width:8vw;
+ position:absolute;
+ left: 72%;  
+ top: 38vh;
+ height: 7vh;
+ width: 7vw;
 }
 
 #answerVerdict
