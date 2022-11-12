@@ -127,11 +127,14 @@ let cityArrJSON='{"cities":[' +
 '{"name" : "Belrin","photo_link" : "./pictures/7.jpg","photo_description" : "Photo by John Copley on flickr ","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Berna","photo_link" : "./pictures/8.jpg","photo_description" : "Photo by Christophe Schindler on Pixabay ","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Bratislava","photo_link" : "./pictures/9.jpg","photo_description" : "Photo by Pixabay on Pixabay ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Bruxelles","photo_link" : "./pictures/10.jpg","photo_description" : "Photo by Romaine on wikimedia ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Budapesta","photo_link" : "./pictures/11.jpg","photo_description" : "Photo by Wallboat on flickr ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Chisinau","photo_link" : "./pictures/12.jpg","photo_description" : "Photo By Photobank MD on flickr ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Copenhaga","photo_link" : "./pictures/13.jpg","photo_description" : "Photo by Marco Almbauer on wikimedia ","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Zagreb","photo_link" : "./pictures/30.jpg","photo_description" : "Photo by Jorge Franganillo on flickr","tips" : " ", "after_response_description":" "}]}';
 
 let list = JSON.parse(cityArrJSON);
 const cities_number=list.cities.length;
-
 
 
 function add_cities_text()
@@ -148,6 +151,9 @@ function add_cities_text()
   list.cities[i++].tips="Poarta Brandenburg";
   list.cities[i++].tips="Turn cu ceas";
   list.cities[i++].tips="Castel";
+  list.cities[i++].tips="Berlaymont - Comisia Europeana";
+  list.cities[i++].tips="Monumentul lui Stefan cel Mare";
+  list.cities[i++].tips="Monumentul lui Stefan cel Mare";
   list.cities[a-1].tips="Teatrul National Croat"; // Zagreb is last city for now, so we keep this as the final line
 }
 
