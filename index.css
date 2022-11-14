@@ -29,14 +29,14 @@ body
 {
   display:none;
   --display: flex;
-  position:relative;
+  position:fixed;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding:10px;
-  top:6vmin;
-  height:25vmin;
-  width:25vmin;
+  top:50vh;
+  height:25vh;
+  width:25vw;
   margin:0;
 } 
 
@@ -122,7 +122,7 @@ font-size:5vw;
 #pictureOrigin
 {
   position:absolute;
-  left:67%;
+  left:65vw;
   top:0%;
   font-size:2.75vmin;
   height:10vh;
@@ -134,11 +134,28 @@ font-size:5vw;
 
 #pictureInfoIcon
 {
+  font-size:5vmin;
+  opacity:0.8;
+}
+
+#fullscreenIconWrapper
+{
  position:absolute;
- left: 72%;  
- top: 38vh;
- height: 7vh;
- width: 7vw;
+ top:0;
+ 
+}
+
+#fullscreenIcon
+{
+  font-size:4vmin;
+  opacity:0.8;
+}
+
+#pictureInfoIconWrapper
+{
+ position:absolute;
+ top:40vh;
+ 
 }
 
 #answerVerdict
@@ -156,12 +173,12 @@ font-size:5vw;
 {
   display: grid;
   position:fixed;
-  bottom:0%;
+  top:80vh;
   grid-template-columns: auto;
   justify-items: center;
   align-items: center;
-  height:20vmin;
-  width:25vmin;
+  height:10vh;
+  width:55vw;
   margin:0;
   padding:0;
 } 
@@ -171,6 +188,20 @@ font-size:5vw;
   font-size:2vw;
   color:antiquewhite;
 }
+
+#options_Wrapper
+{
+  display: grid;
+  grid-template-columns:auto auto;
+  position:fixed;
+  bottom:0%;
+  justify-items: center;
+  align-items: center;
+  height:10vh;
+  width:65vw;
+  margin:0;
+  padding:0;
+} 
 
 .menu_Option
 {
@@ -193,4 +224,16 @@ font-size:5vw;
   margin:10px;
   cursor:pointer;
   background-color:#cd853f;
+}
+
+.option_Button
+{
+  border: 0.1em solid rgb(0, 0, 0);
+  width:15vw;
+  text-align: center;
+  padding:0;
+  font-size:2vw;
+  margin:0;
+  cursor:pointer;
+  background-color:#5e3fcd;
 }
