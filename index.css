@@ -134,8 +134,8 @@ font-size:5vw;
 
 #pictureInfoIcon
 {
-  font-size:5vmin;
-  opacity:0.8;
+  font-size:6vmin;
+  opacity:0.9;
 }
 
 #fullscreenIconWrapper
@@ -147,8 +147,8 @@ font-size:5vw;
 
 #fullscreenIcon
 {
-  font-size:4vmin;
-  opacity:0.8;
+  font-size:6vmin;
+  opacity:0.9;
 }
 
 #pictureInfoIconWrapper
@@ -217,6 +217,7 @@ font-size:5vw;
 {
   border: 0.1em solid red;
   width:15vw;
+  height:4vh;
   text-align: center;
   padding: 5px;
   border-radius: 3em;
