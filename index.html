@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess the City</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -64,8 +65,17 @@
 
   </div>
 
-  <img id="pictureInfoIcon" src="./pictures/i.svg"> <!-- a small i icon, which users can hover over to find some extra information that might help them identify the city-->
+  <div id="pictureInfoIconWrapper">
 
+    <i class="fa fa-info-circle" id="pictureInfoIcon"></i> <!-- a small i icon, which users can hover over to find some extra information that might help them identify the city-->
+  
+  </div>
+
+  <div id="fullscreenIconWrapper">
+
+    <i class="fa fa-camera" id="fullscreenIcon"></i> <!-- a small i icon, which users can hover over to find some extra information that might help them identify the city-->
+    
+  </div>
  
 
 </div><!--pic_Wrapper ends here -->
@@ -97,12 +107,18 @@
     <span style="color:red; font-size:2vw;">Nu s-a raspuns la nicio intrebare. </span> 
   </div>
 
-  
-
 </div>
 
 
 <div id="options_Wrapper">  <!--Div that will wrap misc options, at the bottom of the page -->
+
+  <div class="option_Button" data-value="0" id="fullscreenButton">
+    Fullscreen
+  </div>
+
+  <div class="option_Button" data-value="0" id="infoButton">
+    Info
+  </div>
 
 </div><!--options_Wrapper ends here -->
 
@@ -131,6 +147,12 @@ let cityArrJSON='{"cities":[' +
 '{"name" : "Budapesta","photo_link" : "./pictures/11.jpg","photo_description" : "Photo by Wallboat on flickr ","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Chisinau","photo_link" : "./pictures/12.jpg","photo_description" : "Photo By Photobank MD on flickr ","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Copenhaga","photo_link" : "./pictures/13.jpg","photo_description" : "Photo by Marco Almbauer on wikimedia ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Dublin","photo_link" : "./pictures/14.jpg","photo_description" : "Photo by  MarioMagdic on wikimedia ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Helsinki","photo_link" : "./pictures/15.jpg","photo_description" : "Photo by comedy_nose on flickr ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Lisabona","photo_link" : "./pictures/16.jpg","photo_description" : "Photo by Daquella manera on flickr ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Ljublijana","photo_link" : "./pictures/17.jpg","photo_description" : "Photo by Marco Almbauer on wikimedia ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Madrid","photo_link" : "./pictures/18.jpg","photo_description" : "Photo by Zarateman on wikimedia ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Oslo","photo_link" : "./pictures/19.jpg","photo_description" : "Photo by Daderot on wikimedia ","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Zagreb","photo_link" : "./pictures/30.jpg","photo_description" : "Photo by Jorge Franganillo on flickr","tips" : " ", "after_response_description":" "}]}';
 
 let list = JSON.parse(cityArrJSON);
@@ -155,9 +177,14 @@ function add_cities_text()
   list.cities[i++].tips="Cladirea Parlamentului";
   list.cities[i++].tips="Monumentul lui Stefan cel Mare";
   list.cities[i++].tips="Castelul Rosenborg";
+  list.cities[i++].tips="Podul Samuel Beckett";
+  list.cities[i++].tips="Catedrala Sf. Nicholas";
+  list.cities[i++].tips="Turnul Sf. Vincent din Belem";
+  list.cities[i++].tips="Statuie de pe Podul Dragonilor";
+  list.cities[i++].tips="Poarta Alcala";
+  list.cities[i++].tips="Centrul de Pace Nobel";
   list.cities[a-1].tips="Teatrul National Croat"; // Zagreb is last city for now, so we keep this as the final line
 }
-
 
 add_cities_text();// we execute these to more easily add some cities. 
 
@@ -165,6 +192,8 @@ let wrong_answer_count=0;
 let correct_answer_count=0;
 
 let randCity=-1;
+
+let chosen_city_name;
 
 var img=new Image();
   img.onload=function() // we use this function to load the buttons ONLY when the image is already loaded -- need to change this in the future with a better approach
@@ -181,6 +210,9 @@ function addEventListeners()
 
   document.getElementById("pictureInfoIcon").addEventListener("mouseenter",displayPictureSource);
   document.getElementById("pictureInfoIcon").addEventListener("mouseleave",revertPictureState);
+
+  document.getElementById("infoButton").addEventListener("click",infoButtonDisplayModal);
+  document.getElementById("fullscreenButton").addEventListener("click",fullscreenButtonDisplayModal);
 
   document.getElementById("refresh_Option").addEventListener("click",refreshPage);
 
@@ -262,6 +294,8 @@ function poseAQuestion() // a question should have 1 correct answer, 3 wrong one
   let cityOptions=[randCity]; // this array stores the numbers of the cities whose names have been chosen to be presented in the question. it includes the correct answer and 3 wrong ones
   let other_answers=generateRandomAnswers(randCity); // this is an array with 3 other random cities, except the correct one. we use it to offer options for the question
 
+  chosen_city_name=list.cities[randCity].name;// we use chosen_city_name to display the correct answer after the user clicks on any option
+
   for(let i=1;i<4;i++)
     cityOptions.push(other_answers[i]); // we add the 3 wrong cities to the cityOptions array.
 
@@ -332,13 +366,13 @@ function clickOnOption(i)
   {
     correct_answer_count++; 
     updateScoreCount();
-    updateAnswerVerdict("Raspuns corect");
+    updateAnswerVerdict("Raspuns corect."+"<br>"+"Orasul din imagine este : "+chosen_city_name);
   }
   else
   {
     wrong_answer_count++;
     updateScoreCount();
-    updateAnswerVerdict("Raspuns gresit");
+    updateAnswerVerdict("Raspuns gresit."+"<br>"+"Orasul din imagine este : "+chosen_city_name);
   }
   
   hideImage();// we hide the image 
@@ -351,7 +385,7 @@ function clickOnOption(i)
 function updateScoreCount() /// at the moment we just display correct/wrong answer counts. eventually we will use this to update some challenge specific stats as well
 {
  
-  document.getElementById("score_status").innerHTML="Raspunsuri corecte : "+"<span style=\"color:red; font-size:2vw; \">" + correct_answer_count + "</span>" 
+  document.getElementById("score_status").innerHTML="Raspunsuri corecte : "+"<span style=\"color:red; font-size:2vw; \">" + correct_answer_count + "</span>"+"<br>"; 
   document.getElementById("score_status").innerHTML+="\n"+"Raspunsuri gresite : "+ "<span style=\"color:red; font-size:2vw; \">" + wrong_answer_count + "</span>";
 }
 
@@ -391,6 +425,16 @@ function updateAnswerVerdict(answer)
 {
   console.log("updating answerVerdict text to "+answer);
   document.getElementById("answerVerdict").innerHTML=answer;
+}
+
+function infoButtonDisplayModal()
+{
+
+}
+
+function fullscreenButtonDisplayModal()
+{
+
 }
 
 function set_icon_style()
