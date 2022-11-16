@@ -209,6 +209,17 @@ font-size:5vw;
   width:100%;
   margin:auto;
   padding:0; 
+  object-fit:contain;
+  z-index:-1;
+}
+
+#info_modal_content
+{
+  height:90%;
+  width:90%;
+  margin:auto;
+  padding:0; 
+ 
 }
 
 
@@ -258,8 +269,7 @@ font-size:5vw;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: hidden; /* Enable scroll if needed */
-  background-color:purple; 
-
+  background-image:url("./pictures/background.webp");
   font-size:5vw;
   color:antiquewhite;
   text-align:center;
@@ -270,10 +280,13 @@ font-size:5vw;
 .close {
   position: absolute;
   top: 0;
-  right: 0;
+  margin:0 auto;
+  right:0;
+  z-index: 1;
   color: #f80000;
-  font-size: 10vmin;
+  font-size: 15vmin;
   font-weight: bold;
   padding:0;
   cursor:pointer;
+  border:3px black;
 }
