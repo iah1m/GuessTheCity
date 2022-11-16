@@ -18,7 +18,7 @@
 
 <div id="game_Title">
 
-<p>Ghiceste orasul!</p>
+<p>Ghicește orașul!</p>
 
 </div>
 
@@ -117,7 +117,7 @@
   </div>
 
   <div class="option_Button" data-value="0" id="infoButton">
-    Info
+    Indicatii
   </div>
 
 </div><!--options_Wrapper ends here -->
@@ -193,7 +193,7 @@ function add_cities_text()
   list.cities[i++].tips="Obiectivul din imagine este Poarta Brandenburg. <br> Orasul in care se afla a fost separat timp de 28 de ani printr-un zid, care a fost daramat in 1989. <br> Tara este renumita pentru industria automobilistica, precum si festivalurile specifice, insotite de mancarea traditionala:bere si carnati.";
   list.cities[i++].tips="Obiectivul din imagine este un Turn cu ceas. <br> Tara in care se afla acest oras este renumita pentru neutralitate, ciocolata si exactitatea ceasurilor. <br> Aceasta tara are patru limbi oficiale: Franceza, Italiana, Germana si Romansh.";
   list.cities[i++].tips="Obiectivul din imagine este un Castel. <br> Orasul in care se afla este situat pe Dunare, iar Muntii Carpati incep pe teritoriul acestui oras, prin Carpatii Mici.<br>Aceasta tara a fost legata de Cehia pana in 1992, iar mancarea traditionala a acestei tari este reprezentata de galuste cu branza.";
-  list.cities[i++].tips="Obiectivul din imagine este cladirea Berlaymont, sediul Comisiei Europene.<br> Acest oras este sediul a multiple institutii europene, fiind considerat capitala neoficiala a Uniunii Europene <br> Se considera ca aceasta tara area cea mai buna ciocolata din lume.";
+  list.cities[i++].tips="Obiectivul din imagine este cladirea Berlaymont, sediul Comisiei Europene.<br> Acest oras este sediul a multiple institutii europene, fiind considerat capitala neoficiala a Uniunii Europene. <br> Se considera ca aceasta tara area cea mai buna ciocolata din lume.";
   list.cities[i++].tips="Obiectivul din imagine este Cladirea Parlamentului.<br> Orasul in care se afla a fost format prin unirea a doua orase, si este situat pe Dunare.<br> Tara in care se afla acest oras este vecina cu Romania, mancarea nationala fiind gulasul.";
   list.cities[i++].tips="Obiectivul din imagine este Monumentul lui Stefan cel Mare.<br> Tara in care se afla orasul este recunoscuta atat pentru sistemul extins de manastiri, cat si pentru industria viticola(vinuri).<br> Tara este vecina cu Romania, avand stranse legaturi lingvistice, culturale si istorice.";
   list.cities[i++].tips="Obiectivul din imagine este Castelul Rosenborg.<br>Orasul in care se afla acest obiectiv gazduieste si o Statuie a Micii Sirene.<br>Tara in care se afla acest oras este cunoscuta atat pentru industria Lego, cat si drept o \"Tara a povestilor\", datorita influentei cunoscutului autor de povesti, Hans Christian Andersen.";
@@ -201,7 +201,7 @@ function add_cities_text()
   list.cities[i++].tips="Obiectivul din imagine este Catedrala Sf. Nicholas.<br> Situat langa orasul in care se afla acest monument este centrul companiei Nokia.<br> Tara in care se afla acest oras este cunoscuta drept \"Tara celor o mie de lacuri\",avand renume mondial pentru sistemul unic de educatie.";
   list.cities[i++].tips="Obiectivul din imagine este Turnul Sf. Vincent din Belem.<br> Orasul in care se afla este cunoscut sub denumirea de \"Orasul luminilor\", avand aproximativ 220 de zile luminoase pe an.<br>Tara in care se afla acest oras imparte peninsula Iberica cu o alta tara mai mare, ambele fiind cunoscute pentru mancarea de mare, dar si pentru istoria lor coloniala.";
   list.cities[i++].tips="Obiectivul din imagine este o Statuie de pe Podul Dragonilor.<br> Orasul in care se afla este cunoscut sub denumirea de \"Orasul Dragonilor\".<br> Tara in care se afla acest oras este cunoscuta pentru sistemul extins de pesteri.";
-  list.cities[i++].tips="Obiectivul din imagine este Poarta Alcala.<br>.Tara in care se afla orasul imparte peninsula Iberica cu un stat mai mic.<br> Aceasta tara este cunoscuta pentru muzica flamenco, traditia fotbalistica, precum si plajele extinse, mancarea nationala Paella si pentru luptele cu tauri.";
+  list.cities[i++].tips="Obiectivul din imagine este Poarta Alcala.<br> Tara in care se afla orasul imparte peninsula Iberica cu un stat mai mic.<br> Aceasta tara este cunoscuta pentru muzica flamenco, traditia fotbalistica, precum si plajele extinse, mancarea nationala Paella si pentru luptele cu tauri.";
   list.cities[i++].tips="Obiectivul din imagine este Centrul de Pace Nobel.<br> Orasul in care se afla are o istorie bogata, legata in mare parte de epoca vikingilor.<br> Tara in care se afla este renumita atat pentru sistemul extins de fiorduri, cat si pentru aurora boreala, care se poate observa in nordul tarii.";
   list.cities[a-1].tips="Obiectivul din imagine este Teatrul National. <br>Tara in care se afla este o tara Balcanica.<br>Aceasta tara este cunoscuta pentru plajele extraordinare,acestea fiind folosite adesea ca locatii pentru filme."; // Zagreb is last city for now, so we keep this as the final line
 }
@@ -253,6 +253,25 @@ function addEventListeners()
     options[i].addEventListener("click",function(){clickOnOption(i);});
   
 };
+
+let img_modal=document.getElementById("image_modal");
+let inf_modal=document.getElementById("info_modal");
+
+window.onclick = function(event) { // closing of modals
+  if (event.target == img_modal) {
+    alert("A click");
+    img_modal.style.display = "none";
+  }
+}
+
+window.onclick = function(event) { // closing of modals
+  if (event.target == inf_modal) {
+    alert("A click");
+    inf_modal.style.display = "none";
+  }
+}
+
+
 
 function displayPictureSource()         // use this to blur the image and display the source as text over the blurred image
 {
@@ -508,3 +527,4 @@ function startClassicGame()
 </body>
 
 </html>
+
