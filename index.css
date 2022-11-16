@@ -137,13 +137,14 @@ font-size:5vw;
 {
   font-size:6vh;
   opacity:0.9;
+  color:red;
 }
 
 #fullscreenIconWrapper
 {
  position:absolute;
  top:0;
- 
+ color:red;
 }
 
 #fullscreenIcon
