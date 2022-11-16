@@ -240,20 +240,22 @@ font-size:5vw;
   height:4vh;
   text-align: center;
   padding: 5px;
-  border-radius: 3em;
-  font-size:2vw;
+  border-radius: 2em;
+  font-size:5vmin;
   margin:10px;
   cursor:pointer;
+  text-align:center;
+  justify-content: center;
   background-color:#cd853f;
 }
 
 .option_Button
 {
   border: 0.1em solid rgb(0, 0, 0);
-  width:15vw;
+  width:fit-content;
   text-align: center;
   padding:0;
-  font-size:2vw;
+  font-size:5vmin;
   margin:0;
   cursor:pointer;
   background-color:#5e3fcd;
