@@ -160,7 +160,7 @@ let cityArrJSON='{"cities":[' +
 '{"name" : "Amsterdam","photo_link" : "./pictures/4.jpg","photo_description" : "Photo by Mustang Joe on flickr","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Atena","photo_link" : "./pictures/5.jpg","photo_description" : "Photo by Gary Lee Todd on flickr","tips" : " ", "after_response_description":" "},' +
 '{"name" : "Belgrad","photo_link" : "./pictures/6.jpg","photo_description" : "Photo by Anne & David on flickr ","tips" : " ", "after_response_description":" "},'+
-'{"name" : "Berlin","photo_link" : "./pictures/7.jpg","photo_description" : "Photo by John Copley on flickr ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Belrin","photo_link" : "./pictures/7.jpg","photo_description" : "Photo by John Copley on flickr ","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Berna","photo_link" : "./pictures/8.jpg","photo_description" : "Photo by Christophe Schindler on Pixabay ","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Bratislava","photo_link" : "./pictures/9.jpg","photo_description" : "Photo by Pixabay on Pixabay ","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Bruxelles","photo_link" : "./pictures/10.jpg","photo_description" : "Photo by Romaine on wikimedia ","tips" : " ", "after_response_description":" "},'+
@@ -173,6 +173,9 @@ let cityArrJSON='{"cities":[' +
 '{"name" : "Ljublijana","photo_link" : "./pictures/17.jpg","photo_description" : "Photo by Marco Almbauer on wikimedia ","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Madrid","photo_link" : "./pictures/18.jpg","photo_description" : "Photo by Zarateman on wikimedia ","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Oslo","photo_link" : "./pictures/19.jpg","photo_description" : "Photo by Daderot on wikimedia ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Monaco","photo_link" : "./pictures/20.jpg","photo_description" : "Photo by Robin on Flickr ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Paris","photo_link" : "./pictures/21.jpg","photo_description" : "Photo by Dusty J on flickr ","tips" : " ", "after_response_description":" "},'+
+'{"name" : "Reykjavik","photo_link" : "./pictures/22.jpg","photo_description" : "Photo by Axel Kristinssonon on flickr ","tips" : " ", "after_response_description":" "},'+
 '{"name" : "Zagreb","photo_link" : "./pictures/30.jpg","photo_description" : "Photo by Jorge Franganillo on flickr","tips" : " ", "after_response_description":" "}]}';
 
 let list = JSON.parse(cityArrJSON);
@@ -203,6 +206,9 @@ function add_cities_text()
   list.cities[i++].tips="Obiectivul din imagine este o Statuie de pe Podul Dragonilor.<br> Orasul in care se afla este cunoscut sub denumirea de \"Orasul Dragonilor\".<br> Tara in care se afla acest oras este cunoscuta pentru sistemul extins de pesteri.";
   list.cities[i++].tips="Obiectivul din imagine este Poarta Alcala.<br> Tara in care se afla orasul imparte peninsula Iberica cu un stat mai mic.<br> Aceasta tara este cunoscuta pentru muzica flamenco, traditia fotbalistica, precum si plajele extinse, mancarea nationala Paella si pentru luptele cu tauri.";
   list.cities[i++].tips="Obiectivul din imagine este Centrul de Pace Nobel.<br> Orasul in care se afla are o istorie bogata, legata in mare parte de epoca vikingilor.<br> Tara in care se afla este renumita atat pentru sistemul extins de fiorduri, cat si pentru aurora boreala, care se poate observa in nordul tarii.";
+  list.cities[i++].tips="Obiectivul din imagine este Opera Monte Carlo.<br> Orasul in care se afla este o renumita destinatie turistica si centru de recreare.<br> Tara in care se afla este un microstat, format doar din acest oras, si este situata in sudul Frantei.";
+  list.cities[i++].tips="Obiectivul din imagine este Piramida din Curtea Napoleon.<br>Orasul in care se afla este renumit pentru istoria bogata si numarul mare de atractii turistice recunoscute mondial.<br>Tara in care se afla este renumita pentru traditia culinara si viticola, dar si pentru rolul important in lumea modei.";
+  list.cities[i++].tips="Obiectivul din imagine este Perla.<br>Orasul in care se afla este de departe cel mai mare si important din tara, fiind chiar primul spatiu locuit de oamenii din aceasta insula.<br>Acest oras este cea mai nordica  capitala a unui stat suveran de pe glob.<br> Tara este renumita pentru gheiserele sale. ";
   list.cities[a-1].tips="Obiectivul din imagine este Teatrul National. <br>Tara in care se afla este o tara Balcanica.<br>Aceasta tara este cunoscuta pentru plajele extraordinare,acestea fiind folosite adesea ca locatii pentru filme."; // Zagreb is last city for now, so we keep this as the final line
 }
 add_cities_text();// we execute these to more easily add some cities. 
